@@ -1,0 +1,136 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* My css file below */
+
+html {
+background: url('images/background_test.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+body {
+    width: 100%;
+    height: 100%;
+}
+main {
+    width: 100%;
+    height: 80%;
+    display: flex;
+}
+main img {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.header {
+    margin-top:1%;
+    margin-left: 32%;
+    font-size: 60px;
+    box-shadow: 1px 1px 1px 2px black;
+    background: rgba(255, 255, 255, .65);
+}
+.loginWrapper {
+    margin: 5%;
+    padding: 15px;
+    width: 15%;
+    height: 250px;
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px lightblue;
+    display: flex;
+    text-align: center;
+    background: rgba(255, 255, 255, .4);
+
+}
+.loginWrapper input {
+    margin: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    font-weight: 400;
+}
+.loginWrapper input:focus {
+    outline: none;
+}
+.loginWrapper button {
+    margin-top: 5%;
+    padding: 5%;
+    width: 50%;
+    text-align: center;
+    background-color: #FC8803;
+    border-radius: 7px;
+    opacity: 0.9;
+}
+.loginWrapper button:hover {
+    opacity:1.2;
+}
+.loginInfo button {
+    margin: 3% auto;
+    padding: 4%;
+    width: 60%;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 10px;
+    opacity: 0.9;
+    background-color: #FC8803;
+}
+.loginInfo button:hover {
+    opacity: 1.2;
+}
+.loginInfo {
+    margin-top: 5%;
+    margin-left: 20%;
+    height: auto;
+    width: auto;
+    text-align: center;
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px lightblue;
+    background-color: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, .65);
+
+}
+.infoList ul,li {
+    font-size: 22px;
+    list-style: url('images/icons/list_icon.png');
+    list-style-position: inside;
+    text-align: left;
+}
