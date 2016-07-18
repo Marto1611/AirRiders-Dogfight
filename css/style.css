@@ -43,6 +43,10 @@ table {
 }
 
 /* My css file below */
+@font-face {
+    font-family: "Gtek";
+    src: url('Gtek.ttf') format("truetype");
+}
 
 html {
 background: url('images/background_test.jpg') no-repeat center center fixed;
@@ -61,12 +65,28 @@ main img {
     border: 1px solid black;
     border-radius: 10px;
 }
+@keyframes drawMenu {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes draw {
+    from {opacity: 0; transform: translate3d(-900px,0px,0px);}
+    to {opacity: 1; transform: translate3d(0px,0px,0px);}
+}
 .header {
     margin-top:1%;
+    padding-left: 30px;
     margin-left: 32%;
     font-size: 60px;
     box-shadow: 1px 1px 1px 2px black;
+    border-bottom-left-radius: 100px;
     background: rgba(255, 255, 255, .65);
+    animation: draw 2.5s;
 }
 .loginWrapper {
     margin: 5%;
@@ -79,6 +99,7 @@ main img {
     display: flex;
     text-align: center;
     background: rgba(255, 255, 255, .4);
+    animation: drawMenu 2.1s;
 
 }
 .loginWrapper input {
@@ -126,11 +147,16 @@ main img {
     box-shadow: 2px 2px 2px 2px lightblue;
     background-color: rgb(255, 255, 255);
     background: rgba(255, 255, 255, .65);
-
+    animation: drawMenu 2.1s;
 }
 .infoList ul,li {
     font-size: 22px;
     list-style: url('images/icons/list_icon.png');
     list-style-position: inside;
     text-align: left;
+}
+.error {
+    color: black;
+    font-size: 20px;
+    font-style: oblique;
 }

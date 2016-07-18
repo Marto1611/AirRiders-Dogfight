@@ -6,6 +6,7 @@
     <title>AirRiders Homepage</title>
 </head>
 <body>
+<audio src="jet.mp3" type="audio/mpeg" controller="false" autoplay></audio>
 <h1 class="header">Air Riders-Dogfight</h1>
 <main>
     <div class="loginInfo">
@@ -19,9 +20,9 @@
         <button class="login-request-button ">Register now </button>
     </div>
 <div class="loginWrapper">
-    <form>
-        <input type="text" value="" placeholder="Email" id="email"><br>
-        <input type="password" value="" placeholder="Password" id="password"><br>
+    <form method="post" action="login.php">
+        <input type="text" value="" placeholder="Email" id="email" name="email"><br>
+        <input type="password" value="" placeholder="Password" id="password" name="password"><br>
         <button class="login-request-button">Login</button><br>
     </form>
 </div>
