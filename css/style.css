@@ -89,7 +89,7 @@ main img {
     animation: draw 2.5s;
 }
 .loginWrapper {
-    margin: 5%;
+    margin: 70px;
     padding: 15px;
     width: 15%;
     height: 250px;
@@ -119,6 +119,7 @@ main img {
     background-color: #FC8803;
     border-radius: 7px;
     opacity: 0.9;
+    font-size: 20px;
 }
 .loginWrapper button:hover {
     opacity:1.2;
@@ -137,7 +138,7 @@ main img {
     opacity: 1.2;
 }
 .loginInfo {
-    margin-top: 5%;
+    margin-top: 70px;
     margin-left: 20%;
     height: auto;
     width: auto;
@@ -159,4 +160,55 @@ main img {
     color: black;
     font-size: 20px;
     font-style: oblique;
+}
+.regWrapper {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    width: 30%;
+    height: auto;
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px lightblue;
+    display: block;
+    text-align: center;
+    background: rgba(255, 255, 255, .4);
+    animation: drawMenu 2.1s;
+}
+.regWrapper input {
+    margin: 10px;
+    padding: 2%;
+    border-radius: 10px;
+    font-weight: 400;
+}
+.regWrapper input:focus {
+    outline: none;
+}
+.regWrapper button {
+    margin: 3% auto;
+    padding: 4%;
+    width: 60%;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 10px;
+    opacity: 0.9;
+    background-color: #FC8803;
+}
+#back {
+    font-family: "Arial";
+    margin: 3% auto;
+    padding: 15px;
+    width:auto;
+    text-align: center;
+    font-size: 20px;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    opacity: 0.9;
+    background-color: #FC8803;
+}
+#back:hover {
+    opacity: 1;
+}
+.regWrapper button:hover {
+    opacity: 1;
 }

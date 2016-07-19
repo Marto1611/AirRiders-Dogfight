@@ -24,6 +24,12 @@ if(isset($_SESSION['username'])) {
             <h1><?php echo $row['Model']; ?></h1>
             <hr>
             <img src="css/images/Aircraft/<?php echo $row['AircraftID']; ?>.jpg" width="200" height="150" />
+            <div class="statistics">
+            <p>Attack:</p><hr style="width: <?php echo $row['Armor']; ?>px; display: inline-flex; background: darkred; height: 8px;"><br>
+             <p>Armor:</p><hr style="width: <?php echo $row['Armor']; ?>px; display: inline-flex; background: darkgoldenrod; height: 8px;">
+                <p>Manuverability:</p><hr style="width: <?php echo $row['Manueverability']; ?>px; display: inline-flex; background: darkblue; height: 8px;">
+                <p>Speed:<?php echo $row['Speed']; ?>km/h</p>
+            </div>
             <hr>
             <h1>Produced <?php echo $row['YearOfProduction']; ?></h1>
             <hr>

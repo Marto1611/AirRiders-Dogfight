@@ -139,7 +139,7 @@ html {
 .playerAircraft {
     background: rgba(255, 255, 255, .45);
     display: block;
-    width: 25%;
+    width: 30%;
     margin-top: -5%;
     height: 500px;
     overflow: scroll;
@@ -163,3 +163,9 @@ html {
     color: #00334d;
     font-family: "Arial Black";
 }
+.playerAircraft hr #special {
+    float: left;
+}.statistics {
+    display: block;
+    width: 20%;
+ }
