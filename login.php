@@ -29,6 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="css/images/icons/jetIcon.png" type="image/x-icon" />
     <link type="text/css" rel="stylesheet" href="css/style.css" />
     <meta charset="UTF-8">
     <title>AirRiders Homepage</title>
@@ -48,7 +49,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     </div>
     <div class="loginWrapper">
         <form method="post" action="login.php">
-            <?php if($_GET['logErr']==1) { echo "<p class='error'>Wrong email or password \n Please try again !</p>"; } ?>
+            <?php if(isset($_GET['logErr']) && $_GET['logErr']==1) { echo "<p class='error'>Wrong email or password \n Please try again !</p>"; } ?>
             <input type="text" value="" placeholder="Email" id="email" name="email"><br>
             <input type="password" value="" placeholder="Password" id="password" name="password"><br>
             <button class="login-request-button">Login</button><br>

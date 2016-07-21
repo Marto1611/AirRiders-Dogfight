@@ -4,6 +4,7 @@ include "dataReg.php";
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="css/images/icons/jetIcon.png" type="image/x-icon" />
     <link type="text/css" rel="stylesheet" href="css/style.css" />
     <meta charset="UTF-8">
     <title>Registration</title>

@@ -40,6 +40,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = test_input($_POST['email']);
 
     $insertQuery = mysql_query("INSERT INTO players SET Username='$username', Password='$password',Email='$email'") or die(mysql_error());
+    $_SESSION['username'] = $username;
+    $_SESSION['login'] = true;
     header("Location: profile.php");
 }
 ?>

@@ -142,8 +142,8 @@ html {
     width: 30%;
     margin-top: -5%;
     height: 500px;
-    overflow: scroll;
-    padding: 3px 3px 3px 3px;
+    overflow-y: scroll;
+    padding: 4px 4px 4px 4px;
     border: 2px solid whitesmoke;
     box-shadow: 2px 2px 2px 2px lightblue;
     float: right;
@@ -167,5 +167,40 @@ html {
     float: left;
 }.statistics {
     display: block;
-    width: 20%;
+    width: 60%;
+ }
+ .firstChoose {
+     background: rgba(255, 255, 255, .75);
+     display: inline-block;
+     width: 40%;
+     margin: 20px 10px 20px 20px;
+     height: 720px;
+     overflow-y: hidden;
+     padding: 4px 4px 4px 4px;
+     border: 2px solid whitesmoke;
+     box-shadow: 2px 2px 2px 2px lightblue;
+     animation: drawMenu 1.8s;
+ }
+.firstChoose h1 {
+    font-size: 22px;
+    font-style: oblique;
+    font-family: "Arial Black";
+}
+ .firstChoose button {
+     width:100%;
+     text-align: center;
+     font-size: 30px;
+     border-radius: 10px;
+     opacity: 0.9;
+     background-color: #FC8803;
+ }
+ .firstChoose button:hover {
+     opacity:1;
+ }
+ #aircraft {
+    background: url('images/hangar.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+ .aircraftWrap {
+     float: left;
  }
