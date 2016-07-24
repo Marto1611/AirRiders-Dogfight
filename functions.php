@@ -15,5 +15,26 @@ function Owned($player) {
         $ownedAircraft = mysql_fetch_row($ownedQuery);
         return $ownedAircraft[0];
     }
+
 }
-?>
+function OwnedCycle($player)
+{
+    $ownedQuery2=mysql_query("SELECT ItemID FROM purchases WHERE Username='$player' AND Type='aircraft'") or die(mysql_error());
+    while($row = mysql_fetch_assoc($ownedQuery2))
+    {
+        $values[] = $row['ItemID'];
+    }
+    return $values;
+}
+
+function transBegin()
+{
+    mysql_query("BEGIN");
+}
+function transCommit()
+{
+    mysql_query("COMMIT");
+}
+function transRollback() {
+    mysql_query("ROLLBACK");
+}

@@ -6,6 +6,7 @@
  * Time: 20:03
  */
 include "config.php";
+include "functions.php";
 $user = $_SESSION['username'];
 $fLog_query = mysql_query("SELECT Aircraft FROM players WHERE Username='$user'") or die(mysql_error());
 
@@ -16,7 +17,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     if(isset($_POST['chosen']))
     {
         $chosenAircraft = $_POST['chosen'];
-        $insertQuery = mysql_query("UPDATE players SET aircraft='$chosenAircraft' WHERE Username='$user'") or die(mysql_error());
+        $insertQuery = "INSERT INTO purchases SET Username='$user', Type='aircraft', ItemID='$chosenAircraft'";
+        transBegin();
+        $trans=mysql_query($insertQuery) or die(mysql_error());
+        if(!$trans)
+        {
+            transRollback();
+        }
+        else
+        {
+            transCommit();
+            $updateQuery = mysql_query("UPDATE players SET aircraft='$chosenAircraft' WHERE Username='$user'") or die(mysql_error());
+        }
         header("Location: profile.php");
     }
 }
@@ -36,7 +48,7 @@ if(mysql_num_rows($fLog_query) == 1) {
           {
               while ($row = mysql_fetch_assoc($query2[$i])) {
                   ?>
-                  <div class="firstChoose">
+                  <div class="firstChoose1">
                       <form method="post" action="">
                   <button name="chosen" value="<?php echo $i; ?>">Choose</button>
                           </form>
@@ -77,7 +89,7 @@ if(mysql_num_rows($fLog_query) == 1) {
         <aside class="sidebar">
             <nav>
                 <ul>
-                    <li><h1>500<img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+                    <li><h1><?php echo Cash($user); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
                     <a href="logout.php">Logout</a>
                 </ul>
             </nav>

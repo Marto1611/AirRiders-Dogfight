@@ -18,6 +18,8 @@ if(isset($_SESSION['username'])) {
         {
             ?>
             <div class="firstChoose">
+                <form method="post" action="aircraftPurchase.php">
+                    <input value="<?php echo $row['AircraftID']; ?>" type="hidden" name="Aircraft"/>
             <h1><?php echo $row['Model']; ?></h1>
             <hr>
             <img src="css/images/Aircraft/<?php echo $row['AircraftID']; ?>.jpg" width="200" height="150" />
@@ -35,23 +37,33 @@ if(isset($_SESSION['username'])) {
             <hr>
             <p style="height: 200px;"><?php echo $row['InfoAboutAircraft']; ?></p>
                 <hr>
-                <?php if(Owned($_SESSION['username']) == $row['AircraftID']) { ?>
-
-                    <button disabled style="opacity: 1;"><h1>Owned</h1></button>
-
-                <?php     }
-                else {
-                    if (Cash($_SESSION['username']) > $row['Price']) { ?>
-                        <button>Buy <?php echo $row['Price'] ?><img src="css/images/icons/coin.svg" width="40px"
-                                                                    height="30px"/></button>
-                    <?php } else {
-                        ?>
-                        <button disabled>Buy <?php echo $row['Price'] ?><img src="css/images/icons/coin.svg"
-                                                                             width="40px" height="30px"/></button>
-                        <?php
+                <?php
+                for($i=0;$i<sizeof(OwnedCycle($_SESSION['username']));$i++) {
+                    if (OwnedCycle($_SESSION['username'])[$i] == $row['AircraftID']) {
+                        $owned = true;
+                        break;
+                    } else {
+                        $owned = false;
                     }
                 }
+                if($owned) {
+                    ?>
+                    <button disabled style="opacity: 1;">Owned</button>
+                    <?php
+                }
+                else {
+                        if (Cash($_SESSION['username']) > $row['Price']) { ?>
+                            <button name="Price" value="<?php echo $row['Price']; ?>">Buy <?php echo $row['Price'] ?><img src="css/images/icons/coin.svg" width="40px"
+                                                                                                                          height="30px"/></button>
+                        <?php } else {
+                            ?>
+                            <button disabled>Buy <?php echo $row['Price'] ?><img src="css/images/icons/coin.svg"
+                                                                                 width="40px" height="30px"/></button>
+                            <?php
+                        }
+                }
             ?>
+                    </form>
             </div>
             <?php
         }

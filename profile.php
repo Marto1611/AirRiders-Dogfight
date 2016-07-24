@@ -92,7 +92,7 @@ if(isset($_SESSION['username'])) {
 </aside>
 <main>
     <div class="playerAircraft">
-        <h2>Your Aircraft:</h2>
+        <h2>Selected Aircraft:</h2>
         <hr>
         <?php PlayerAircraft($player); ?>
     </div>

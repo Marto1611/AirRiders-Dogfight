@@ -197,6 +197,34 @@ html {
  .firstChoose button:hover {
      opacity:1;
  }
+.firstChoose1 {
+    background: rgba(255, 255, 255, .75);
+    display: inline-block;
+    width: 25%;
+    margin: 20px 10px 20px 20px;
+    height: 500px;
+    overflow-y: scroll;
+    padding: 4px 4px 4px 4px;
+    border: 2px solid whitesmoke;
+    box-shadow: 2px 2px 2px 2px lightblue;
+    animation: drawMenu 1.8s;
+}
+.firstChoose1 h1 {
+    font-size: 24px;
+    font-style: oblique;
+    font-family: "Arial Black";
+}
+.firstChoose1 button {
+    width:100%;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 10px;
+    opacity: 0.9;
+    background-color: #FC8803;
+}
+.firstChoose1 button:hover {
+    opacity:1;
+}
  #aircraft {
     background: url('images/hangar.jpg') no-repeat center center fixed;
     background-size: cover;
