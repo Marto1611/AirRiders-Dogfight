@@ -14,11 +14,13 @@ if(isset($_SESSION['username'])) {
     function PlayerAircraft()
     {
         $query2 = mysql_query("SELECT * FROM `aircraft`") or die(mysql_error());
+        $i=0;
         while($row=mysql_fetch_assoc($query2))
         {
+            $i++;
             ?>
             <div class="firstChoose">
-                <form method="post" action="aircraftPurchase.php">
+                <form method="post" action="aircraftPurchase.php" id="<?php echo $i; ?>">
                     <input value="<?php echo $row['AircraftID']; ?>" type="hidden" name="Aircraft"/>
             <h1><?php echo $row['Model']; ?></h1>
             <hr>
@@ -38,8 +40,8 @@ if(isset($_SESSION['username'])) {
             <p style="height: 200px;"><?php echo $row['InfoAboutAircraft']; ?></p>
                 <hr>
                 <?php
-                for($i=0;$i<sizeof(OwnedCycle($_SESSION['username']));$i++) {
-                    if (OwnedCycle($_SESSION['username'])[$i] == $row['AircraftID']) {
+                for($j=0;$j<sizeof(OwnedCycle($_SESSION['username']));$j++) {
+                    if (OwnedCycle($_SESSION['username'])[$j] == $row['AircraftID']) {
                         $owned = true;
                         break;
                     } else {
@@ -48,13 +50,14 @@ if(isset($_SESSION['username'])) {
                 }
                 if($owned) {
                     ?>
-                    <button disabled style="opacity: 1;">Owned</button>
+                    <button disabled style="opacity: 1; color: black;">Owned</button>
                     <?php
                 }
                 else {
                         if (Cash($_SESSION['username']) > $row['Price']) { ?>
-                            <button name="Price" value="<?php echo $row['Price']; ?>">Buy <?php echo $row['Price'] ?><img src="css/images/icons/coin.svg" width="40px"
-                                                                                                                          height="30px"/></button>
+                            <input type="hidden" value="<?php echo $row['Price']; ?>" name="Price"/>
+                            <button value="<?php echo $row['Price']; ?>">Purchase <?php echo $row['Price'] ?><img src="css/images/icons/coin.svg" width="40px"
+                                                                                                                  height="30px"/></button>
                         <?php } else {
                             ?>
                             <button disabled>Buy <?php echo $row['Price'] ?><img src="css/images/icons/coin.svg"
@@ -65,6 +68,17 @@ if(isset($_SESSION['username'])) {
             ?>
                     </form>
             </div>
+           <script type="text/javascript">
+                function SubmitF<?php echo $i; ?>()
+                {
+                    document.getElementById("<?php echo $i; ?>").submit();
+                }
+                $("#<?php echo $i; ?>").submit(function(event) {
+                    event.preventDefault();
+                    alertify.confirm('Confirm Purchase', 'Are you sure you want to purchase this aircraft ?', function(){ alertify.success('Confirmed purchase!',5,SubmitF<?php echo $i; ?>()) }
+                        , function(){ alertify.error('Purchase declined')}).set('labels', {ok: "Confirm", cancel: "Decline"});
+                });
+            </script>
             <?php
         }
     }
@@ -73,11 +87,16 @@ if(isset($_SESSION['username'])) {
     <!DOCTYPE html >
     <html lang = "en" id="aircraft">
     <head >
-        <link href="http://allfont.net/allfont.css?fonts=arial-black" rel="stylesheet" type="text/css" />
+        <script src="alertifyjs/jquery-3.1.0.min.js"></script>
+        <script src="alertifyjs/alertify.min.js"></script>
+        <!-- include the style -->
+        <link rel="stylesheet" href="alertifyjs/css/alertify.min.css" />
+        <!-- include a theme -->
+        <link rel="stylesheet" href="alertifyjs/themes/default.css" />
         <link rel="shortcut icon" href="css/images/icons/jetIcon.png" type="image/x-icon" />
         <link type = "text/css" rel = "stylesheet" href = "css/profile.css" />
         <meta charset = "UTF-8" >
-        <title >Aircraft Hangar</title >
+        <title >Aircraft Hangar</title>
     </head >
     <body>
     <aside class="sidebar">

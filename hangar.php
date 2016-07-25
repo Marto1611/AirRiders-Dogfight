@@ -16,7 +16,11 @@ if(isset($_SESSION['username'])) {
         while($row1 = mysql_fetch_row($query1)) {
             $aircraftID = $row1[0];
             $query2 = mysql_query("SELECT * FROM `aircraft` WHERE AircraftID='$aircraftID'") or die(mysql_error());
+            $query3 = mysql_query("SELECT Aircraft FROM `players` WHERE Username='$player'") or die(mysql_error());
+            $selectedAircraft = mysql_fetch_row($query3);
+            $i=0;
             while ($row = mysql_fetch_assoc($query2)) {
+                $i++;
                 ?>
                 <div class="firstChoose">
                     <h1><?php echo $row['Model']; ?></h1>
@@ -40,7 +44,25 @@ if(isset($_SESSION['username'])) {
                     <hr>
                     <p style="height: 200px;"><?php echo $row['InfoAboutAircraft']; ?></p>
                     <hr>
-                    <button disabled style="opacity: 1;">Owned</button>
+                    <?php if($selectedAircraft[0] == $row['AircraftID']) {?>
+                    <button disabled style="opacity: 1; color: black;">Selected</button>
+                    <?php } else { ?>
+                        <form method="post" action="selectAircraft.php" id="<?php echo $i; ?>">
+                            <input value="<?php echo $row['AircraftID']; ?>" type="hidden" name="Aircraft"/>
+                            <button value="<?php echo $row['AircraftID']?>">Select</button>
+                            </form>
+                        <script type="text/javascript">
+                            function SelectF<?php echo $i; ?>()
+                            {
+                                document.getElementById("<?php echo $i; ?>").submit();
+                            }
+                            $("#<?php echo $i; ?>").submit(function(event) {
+                                event.preventDefault();
+                                alertify.confirm('Confirm Selection', 'Are you sure you want to select this aircraft as primary ?', function(){ alertify.success('Confirmed Selection!',5,SelectF<?php echo $i; ?>()) }
+                                    , function(){ alertify.error('Selection declined')}).set('labels', {ok: "Confirm", cancel: "Decline"});
+                            });
+                        </script>
+                    <?php } ?>
                 </div>
                 <?php
             }
@@ -51,6 +73,12 @@ if(isset($_SESSION['username'])) {
     <!DOCTYPE html >
     <html lang = "en" id="aircraft">
     <head >
+        <script src="alertifyjs/jquery-3.1.0.min.js"></script>
+        <script src="alertifyjs/alertify.min.js"></script>
+        <!-- include the style -->
+        <link rel="stylesheet" href="alertifyjs/css/alertify.min.css" />
+        <!-- include a theme -->
+        <link rel="stylesheet" href="alertifyjs/themes/default.css" />
         <link href="http://allfont.net/allfont.css?fonts=arial-black" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="css/images/icons/jetIcon.png" type="image/x-icon" />
         <link type = "text/css" rel = "stylesheet" href = "css/profile.css" />
@@ -66,7 +94,7 @@ if(isset($_SESSION['username'])) {
                 <a href="register.html"><li></li>Missions</li></a>
                 <a href="hangar.php"><li>Hangar</li></a>
                 <a href="register.html"><li>Supplies</li></a>
-                <li><h1><?php Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+                <li><h1><?php echo Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
                 <a href="logout.php">Logout</a>
             </ul>
         </nav>

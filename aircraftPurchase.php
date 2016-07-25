@@ -11,16 +11,15 @@ require "functions.php";
 $username = $_SESSION['username'];
 $aircraft = $_POST['Aircraft'];
 $newCash = Cash($username) - $_POST['Price'];
-if($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    if($newCash > 0) {
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($newCash > 0) {
         $purchaseQuery = "INSERT INTO purchases SET Username='$username',ItemID='$aircraft',Type='aircraft'";
         $costQuery = "UPDATE players SET Cash='$newCash' WHERE Username='$username'";
 
         transBegin();
 
         $result = mysql_query($purchaseQuery) or die(mysql_error());
-        $result1 = mysql_query($costQuery);
+        $result1 = mysql_query($costQuery) or die(mysql_error());
         if (!$result || !$result1) {
             transRollback();
             header("Location: aircraft.php");
