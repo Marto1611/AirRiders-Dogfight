@@ -49,6 +49,10 @@ if(isset($_SESSION['username'])) {
             <hr>
             <img src="css/images/Aircraft/<?php echo $row['AircraftID']; ?>.jpg" width="200" height="150" />
             <hr>
+            <h1>Ammunition</h1>
+            <p style="margin-top: 5px;">Rocket Ammo: <span style="color: #00334d; font-weight: bold; font-size: 20px;"><?php echo MissileAmmo($player); ?></span> pcs</p>
+            <p style="margin-top: 5px;">Guns Ammo: <span style="color: #00334d; font-weight: bold; font-size: 20px;" ><?php echo GunsAmmo($player); ?></span> pcs</p>
+            <hr>
             <h1>Specifications</h1>
             <br>
             <div class="statistics">
@@ -82,10 +86,11 @@ if(isset($_SESSION['username'])) {
         <ul>
             <a href="profile.php" id="home"><li></li>Home</l></a>
             <a href="aircraft.php" ><li >Aircraft</li></a>
-            <a href="register.html"><li></li>Missions</li></a>
+            <a href="missions.php"><li></li>Missions</li></a>
             <a href="hangar.php"><li>Hangar</li></a>
-            <a href="register.html"><li>Supplies</li></a>
-            <li><h1><?php echo Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+            <a href="supplies.php"><li>Supplies</li></a>
+            <li><h1 style="margin-top: 5px;"><?php echo Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+            <li><h1 style="font-size: 30px;">Level <?php echo Level($player); ?><br><hr style="margin: 0; height: 8px; background: darkgoldenrod; width: <?php echo CurrXP($player); ?>%;"/></h1></li>
             <a href="logout.php">Logout</a>
         </ul>
     </nav>

@@ -27,6 +27,10 @@ if(isset($_SESSION['username'])) {
                     <hr>
                     <img src="css/images/Aircraft/<?php echo $row['AircraftID']; ?>.jpg" width="200" height="150"/>
                     <hr>
+                    <h1>Ammunition</h1>
+                    <p style="margin-top: 5px;">Rocket Ammo: <span style="color: #00334d; font-weight: bold; font-size: 20px;"><?php echo MissileAmmo($player); ?></span> pcs</p>
+                    <p style="margin-top: 5px;">Guns Ammo: <span style="color: #00334d; font-weight: bold; font-size: 20px;" ><?php echo GunsAmmo($player); ?></span> pcs</p>
+                    <hr>
                     <h1>Specifications</h1>
                     <br>
                     <div class="statistics">
@@ -45,7 +49,7 @@ if(isset($_SESSION['username'])) {
                     <p style="height: 200px;"><?php echo $row['InfoAboutAircraft']; ?></p>
                     <hr>
                     <?php if($selectedAircraft[0] == $row['AircraftID']) {?>
-                    <button disabled style="opacity: 1; color: black;">Selected</button>
+                    <button disabled style="opacity: 1; color: black; background-color: darkgoldenrod">Selected</button>
                     <?php } else { ?>
                         <form method="post" action="selectAircraft.php" id="<?php echo $i; ?>">
                             <input value="<?php echo $row['AircraftID']; ?>" type="hidden" name="Aircraft"/>
@@ -71,7 +75,7 @@ if(isset($_SESSION['username'])) {
     ?>
 
     <!DOCTYPE html >
-    <html lang = "en" id="aircraft">
+    <html lang = "en" id="myHangar">
     <head >
         <script src="alertifyjs/jquery-3.1.0.min.js"></script>
         <script src="alertifyjs/alertify.min.js"></script>
@@ -91,10 +95,11 @@ if(isset($_SESSION['username'])) {
             <ul>
                 <a href="profile.php" id="home"><li></li>Home</l></a>
                 <a href="aircraft.php" ><li >Aircraft</li></a>
-                <a href="register.html"><li></li>Missions</li></a>
+                <a href="missions.php"><li></li>Missions</li></a>
                 <a href="hangar.php"><li>Hangar</li></a>
-                <a href="register.html"><li>Supplies</li></a>
-                <li><h1><?php echo Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+                <a href="supplies.php"><li>Supplies</li></a>
+                <li><h1 style="margin-top: 5px;"><?php echo Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+                <li><h1 style="font-size: 30px;">Level <?php echo Level($player); ?><br><hr style="margin: 0px; height: 8px; background: darkgoldenrod; width: <?php echo CurrXP($player); ?>%;"/></h1></li>
                 <a href="logout.php">Logout</a>
             </ul>
         </nav>

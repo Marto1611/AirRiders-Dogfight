@@ -74,8 +74,7 @@ html {
 }
 .sidebar h1 {
     margin-left: 50px;
-    margin-top: 5px;
-    font-size: 40px;
+    font-size: 35px;
     animation: drawMenu 1.8s;
 }
 @keyframes drawMenu {
@@ -105,7 +104,7 @@ html {
     transition-duration: 0.5s;
 }
 .sidebar #home {
-    margin-left: 15%;
+    margin-left: 12%;
 }
 .currentMissions {
     margin-top: 20px;
@@ -170,16 +169,16 @@ html {
     width: 60%;
  }
  .firstChoose {
-     background: rgba(255, 255, 255, .75);
+     background: rgba(192, 192, 192, .85);
      display: inline-block;
      width: 40%;
      margin: 20px 10px 20px 20px;
-     height: 720px;
+     height: 800px;
      overflow-y: hidden;
      padding: 4px 4px 4px 4px;
      border: 2px solid whitesmoke;
      box-shadow: 2px 2px 2px 2px lightblue;
-     animation: drawMenu 1.8s;
+     animation: drawMenu 2s;
  }
 .firstChoose h1 {
     font-size: 22px;
@@ -195,7 +194,7 @@ html {
      background-color: #FC8803;
  }
  .firstChoose button:hover {
-     opacity:1;
+     opacity: 1;
  }
 .firstChoose1 {
     background: rgba(255, 255, 255, .75);
@@ -229,6 +228,79 @@ html {
     background: url('images/hangar.jpg') no-repeat center center fixed;
     background-size: cover;
 }
+ #missions {
+     background: url('images/mission.jpg') no-repeat fixed;
+     background-size: cover;
+ }
+ #myHangar {
+     background: url('images/myHangar.jpg') no-repeat center center fixed;
+     background-size: cover;
+ }
+ #supplies {
+     background: url('images/supplies.jpg') no-repeat center center fixed;
+     background-size: cover;
+ }
  .aircraftWrap {
      float: left;
  }
+.missionStyle {
+
+    background: rgba(255, 255, 255, .5);
+    display: inline-block;
+    width: 25%;
+    margin: 20px 10px 20px 20px;
+    padding: 4px 4px 4px 4px;
+    border: 2px solid whitesmoke;
+    box-shadow: 2px 2px 2px 2px lightblue;
+    animation: drawMenu 1.8s;
+}
+.missionStyle h1 {
+    font-size: 20px;
+    color: #00334d;
+    font-weight: bold;
+}
+.missionStyle  button:disabled
+{
+    background-color: red;
+}
+.missionStyle button {
+     width: 100%;
+     text-align: center;
+     font-size: 18px;
+     border-radius: 10px;
+     opacity: 0.8;
+     background-color: #FC8803;
+ }
+.missionStyle button:hover {
+    opacity:1;
+}
+.ammoBox {
+    background: rgba(71, 71, 71, .8);
+    display: inline-block;
+    width: 300px;
+    margin: 20px 10px 20px 20px;
+    padding: 4px 4px 4px 4px;
+    border: 2px solid whitesmoke;
+    box-shadow: 2px 2px 2px 2px dimgray;
+    animation: drawMenu 1.8s;
+}
+.ammoBox h1 {
+    font-size: 25px;
+    color: #C0C0C0;
+    font-weight: bold;
+}
+.ammoBox  button:disabled
+{
+    background-color: red;
+}
+.ammoBox button {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 10px;
+    opacity: 0.8;
+    background-color: #FC8803;
+}
+.ammobox button:hover {
+    opacity:1;
+}

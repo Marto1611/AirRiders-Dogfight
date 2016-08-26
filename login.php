@@ -13,12 +13,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     if (!empty($_POST['password'])) {
         $password = test_input(md5($_POST['password']));
     }
-    $q = mysql_query("SELECT Username,Email,Password FROM players WHERE Email='$email' AND Password='$password'") or die(mysql_error());
+    $q = mysql_query("SELECT Username,Email,Password,Level FROM players WHERE Email='$email' AND Password='$password'") or die(mysql_error());
     if(mysql_num_rows($q) == 1)
     {
         $user = mysql_fetch_row($q);
         $_SESSION['login']= true;
         $_SESSION["username"] = $user[0];
+        $_SESSION["lvl"] = $user[3];
         header("Location: profile.php");
     }
     else{

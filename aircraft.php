@@ -26,6 +26,10 @@ if(isset($_SESSION['username'])) {
             <hr>
             <img src="css/images/Aircraft/<?php echo $row['AircraftID']; ?>.jpg" width="200" height="150" />
             <hr>
+                    <h1>Ammunition</h1>
+                    <br>
+                   <h2><?php echo $row['Ammunition']; ?></h2>
+                    <hr>
             <h1>Specifications</h1>
             <br>
             <div class="statistics">
@@ -50,7 +54,7 @@ if(isset($_SESSION['username'])) {
                 }
                 if($owned) {
                     ?>
-                    <button disabled style="opacity: 1; color: black;">Owned</button>
+                    <button disabled style="opacity: 1; color: black; background-color: darkgoldenrod;">Owned</button>
                     <?php
                 }
                 else {
@@ -71,11 +75,11 @@ if(isset($_SESSION['username'])) {
            <script type="text/javascript">
                 function SubmitF<?php echo $i; ?>()
                 {
-                    document.getElementById("<?php echo $i; ?>").submit();
+                    setTimeout(function(){ document.getElementById("<?php echo $i; ?>").submit() },1000);
                 }
                 $("#<?php echo $i; ?>").submit(function(event) {
                     event.preventDefault();
-                    alertify.confirm('Confirm Purchase', 'Are you sure you want to purchase this aircraft ?', function(){ alertify.success('Confirmed purchase!',5,SubmitF<?php echo $i; ?>()) }
+                    alertify.confirm('Confirm Purchase', 'Are you sure you want to purchase this aircraft ?', function(){ alertify.success('Confirming purchase \n Please wait.....',3,SubmitF<?php echo $i; ?>()) }
                         , function(){ alertify.error('Purchase declined')}).set('labels', {ok: "Confirm", cancel: "Decline"});
                 });
             </script>
@@ -87,6 +91,13 @@ if(isset($_SESSION['username'])) {
     <!DOCTYPE html >
     <html lang = "en" id="aircraft">
     <head >
+        <script type="text/javascript">
+            <?php if($_SESSION["success"] == 1)  { ?>
+            document.addEventListener('DOMContentLoaded', function() {
+                alertify.success('Purchase successful! You can access your new aircraft from Hangar!',5);
+            }, false);
+            <?php $_SESSION["success"] = 0; }?>
+        </script>
         <script src="alertifyjs/jquery-3.1.0.min.js"></script>
         <script src="alertifyjs/alertify.min.js"></script>
         <!-- include the style -->
@@ -104,10 +115,11 @@ if(isset($_SESSION['username'])) {
             <ul>
                 <a href="profile.php" id="home"><li></li>Home</l></a>
                 <a href="aircraft.php" ><li >Aircraft</li></a>
-                <a href="register.html"><li></li>Missions</li></a>
+                <a href="missions.php"><li></li>Missions</li></a>
                 <a href="hangar.php"><li>Hangar</li></a>
-                <a href="register.html"><li>Supplies</li></a>
-                <li><h1><?php echo Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+                <a href="supplies.php"><li>Supplies</li></a>
+                <li><h1 style="margin-top: 5px;"><?php echo Cash($player); ?><img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1></li>
+                <li><h1 style="font-size: 30px;">Level <?php echo Level($player); ?><br><hr style="margin: 0px; height: 8px; background: darkgoldenrod; width: <?php echo CurrXP($player); ?>%;"/></h1></li>
                 <a href="logout.php">Logout</a>
             </ul>
         </nav>

@@ -10,8 +10,8 @@ include "config.php";
 require "functions.php";
 $username = $_SESSION['username'];
 $aircraft = $_POST['Aircraft'];
-$newCash = Cash($username) - $_POST['Price'];
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $newCash = Cash($username) - $_POST['Price'];
     if ($newCash > 0) {
         $purchaseQuery = "INSERT INTO purchases SET Username='$username',ItemID='$aircraft',Type='aircraft'";
         $costQuery = "UPDATE players SET Cash='$newCash' WHERE Username='$username'";
@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             transRollback();
             header("Location: aircraft.php");
         } else {
+            $_SESSION["success"] = 1;
             transCommit();
             header("Location: aircraft.php");
         }
