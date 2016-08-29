@@ -41,7 +41,7 @@ if(isset($_SESSION['username'])) {
                             if(IsCurrMission($_SESSION["username"]) == $row["MissionID"])
                             {
                         ?>
-                                <button disabled style="opacity: 1; color: black; background-color: darkgoldenrod;">Time Left: <div id="timer"></div></button>
+                                <button disabled style="opacity: 1; color: black; background-color: darkgoldenrod;"><div id="timer"></div></button>
                                 <?php
                     } else { ?>
                                 <button disabled style="opacity: 1; color: black;">You are already on a Mission</button>
@@ -137,6 +137,7 @@ if(isset($_SESSION['username'])) {
             <hr>
             <h1>Guns Ammo QTY: <u style="color: darkgoldenrod;"><?php echo GunsAmmo($_SESSION["username"]); ?></u></h1>
             <h1>Missiles: <u style="color: darkgoldenrod;"><?php echo MissileAmmo($_SESSION["username"]); ?></u></h1>
+			<a href="supplies.php" style="color: darkgoldenrod; margin: 6px;">Buy Ammo</a>
         </div>
     </main>
     </body >

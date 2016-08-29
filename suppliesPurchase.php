@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ammo"])) {
     $ammo = $_POST["ammo"];
     if ($ammo == 1) {
         $newCash = Cash($_SESSION["username"]) - 0.5;
-        if ($newCash > 0) {
+        if ($newCash >= 0) {
             $newGunAmmo = GunsAmmo($_SESSION["username"]) + 400;
             $gaQuery = mysql_query("UPDATE `players` SET gAmmo='$newGunAmmo', Cash='$newCash' WHERE Username='$_SESSION[username]'") or die(mysql_error());
             $_SESSION["ammoCrate"] = 1;

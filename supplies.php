@@ -67,7 +67,11 @@ if(isset($_SESSION['username'])) {
                 <h1>Price: 0.5<img src="css/images/icons/coin.svg" width="40px" height="30px"/></h1>
                 <hr>
                 <input name="ammo" type="hidden" value="1"/>
-            <button>Buy</button>
+				<?php if(Cash($_SESSION["username"]) >= 0.5) { ?>
+                <button>Buy</button>
+                <?php } else { ?>
+                    <button disabled>Not enough Coins</button>
+                <?php } ?>
             </form>
         </div>
         <div class="ammoBox">
