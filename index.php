@@ -1,3 +1,9 @@
+<?php
+include "config.php";
+include "functions.php";
+if(isset($_SESSION["username"])) {
+header("Location: profile.php");
+} else { ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,3 +36,4 @@
     </main>
 </body>
 </html>
+<?php } ?>

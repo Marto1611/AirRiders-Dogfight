@@ -18,7 +18,7 @@ function Owned($player) {
 
 }
 function Level($player) {
-    $levelQuery=mysql_query("SELECT Level FROM `players` WHERE Username='$player'") or die(mysql_error());
+    $levelQuery=mysql_query("SELECT LVL FROM `players` WHERE Username='$player'") or die(mysql_error());
     if(mysql_num_rows($levelQuery) == 1)
     {
         $level = mysql_fetch_row($levelQuery);
@@ -70,12 +70,60 @@ function transCommit()
 function transRollback() {
     mysql_query("ROLLBACK");
 }
+function IsCurrMission($player)
+{
+    $MissionQuery=mysql_query("SELECT MissID FROM player_mission WHERE player='$player' AND Completed='0'") or die(mysql_error());
+    while($row = mysql_fetch_assoc($MissionQuery))
+    {
+        return $row["MissID"];
+    }
+}
 function CurrMission($player)
 {
-    $MissionQuery=mysql_query("SELECT player FROM player_mission WHERE player='$player'") or die(mysql_error());
+    $MissionQuery=mysql_query("SELECT player FROM player_mission WHERE player='$player' AND Completed='0'") or die(mysql_error());
     if(mysql_fetch_row($MissionQuery) > 0)
     {
         return true;
     }
     else return false;
 }
+function CurrMissionTimeLeft($player)
+{
+    $currMissionQuery = mysql_query("SELECT * FROM `player_mission` WHERE player='$player'") or die(mysql_error());
+    while ($row = mysql_fetch_assoc($currMissionQuery)) {
+        $timeLeft = $row["time_end"] - strtotime("now");
+        $timeLeftHrs = (int)($timeLeft / 3600);
+        $timeLeftMin = (int)(($timeLeft - $timeLeftHrs * 3600) / 60);
+        $timeLeftSec = $timeLeft % 60;
+        $timeLeftHMS = $timeLeftHrs . "/h " . $timeLeftMin . "/m " . $timeLeftSec . "/s";
+        return $timeLeftHMS;
+    }
+}
+function MissionName($id)
+{
+    $missQuery=mysql_query("SELECT Name FROM `missions` WHERE MissionID='$id'") or die(mysql_error());
+    while($row = mysql_fetch_assoc($missQuery))
+    {
+        return $row["Name"];
+    }
+}
+function isMissionCompleted($player,$id)
+{
+    $IMCquery=mysql_query("SELECT Completed FROM  `player_mission` WHERE player='$player' AND MissID='$id' ") or die(mysql_error());
+    while($row = mysql_fetch_assoc($IMCquery))
+    {
+        return $row["Completed"];
+    }
+}
+function LevelUp($player)
+{
+    $lvlQuery = mysql_query("SELECT CurrXP FROM `players` WHERE Username='$player'") or die(mysql_error());
+    while($row = mysql_fetch_assoc($lvlQuery)) {
+        if ($row["CurrXP"] >= 100) {
+            $newLevel = Level($player) + 1;
+            $levelUpQuery = mysql_query("UPDATE `players` SET LVL='$newLevel', CurrXP='0' WHERE Username='$player'") or die(mysql_error());
+            $_SESSION["lvl"] = $newLevel;
+        }
+    }
+}
+

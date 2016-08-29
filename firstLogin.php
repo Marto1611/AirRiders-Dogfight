@@ -9,8 +9,6 @@ include "config.php";
 include "functions.php";
 $user = $_SESSION['username'];
 $fLog_query = mysql_query("SELECT Aircraft FROM players WHERE Username='$user'") or die(mysql_error());
-
-
 // inserting selected plane into DB
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -29,6 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             transCommit();
             $updateQuery = mysql_query("UPDATE players SET aircraft='$chosenAircraft' WHERE Username='$user'") or die(mysql_error());
         }
+        $_SESSION["login"] = true;
         header("Location: profile.php");
     }
 }
@@ -56,6 +55,11 @@ if(mysql_num_rows($fLog_query) == 1) {
                   <h1><?php echo $row['Model']; ?></h1>
                   <hr>
                   <img src="css/images/Aircraft/<?php echo $row['AircraftID']; ?>.jpg" width="200" height="150"/>
+                      <hr>
+                      <h1>Ammunition</h1>
+                      <br>
+                      <h2><?php echo $row['Ammunition']; ?></h2>
+                      <hr>
                   <div class="statistics">
                       <p>Attack:</p>
                       <hr style="width: <?php echo $row['Armor']; ?>px; display: inline-flex; background: darkred; height: 8px;">

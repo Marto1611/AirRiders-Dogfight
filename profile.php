@@ -2,13 +2,14 @@
 include "config.php";
 // First login profile page
 $user = $_SESSION['username'];
-$fLog_query = mysql_query("SELECT Aircraft FROM players WHERE Username='$user'") or die(mysql_error());
+$fLog_query = mysql_query("SELECT Aircraft,LVL FROM players WHERE Username='$user'") or die(mysql_error());
 
 if(mysql_num_rows($fLog_query) == 1)
 {
     $ARCF = mysql_fetch_row($fLog_query);
     if($ARCF[0]==null || $ARCF[0]==0)
     {
+        $_SESSION["lvl"] = $ARCF[1];
         header("Location: firstLogin.php");
     }
     else
@@ -74,11 +75,26 @@ if(isset($_SESSION['username'])) {
     <!DOCTYPE html >
 <html lang = "en" >
 <head >
+    <script src="alertifyjs/jquery-3.1.0.min.js"></script>
+    <script src="alertifyjs/alertify.min.js"></script>
+    <!-- include the style -->
+    <link rel="stylesheet" href="alertifyjs/css/alertify.min.css" />
+    <!-- include a theme -->
+    <link rel="stylesheet" href="alertifyjs/themes/default.css" />
     <link href="http://allfont.net/allfont.css?fonts=arial-black" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="css/images/icons/jetIcon.png" type="image/x-icon" />
     <link type = "text/css" rel = "stylesheet" href = "css/profile.css" />
     <meta charset = "UTF-8" >
     <title ><?php echo $player; ?>'s Profile</title >
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            setInterval(function(){
+                $('#timer').load('timer.php');
+            },1000);
+
+        });
+    </script>
 </head >
 <body >
 <aside class="sidebar">
@@ -104,10 +120,15 @@ if(isset($_SESSION['username'])) {
     <h1 class="welcomeMessage">Welcome back, <?php echo $player; ?></h1>
     <div class="currentMissions">
         <h1>Current Missions:</h1>
-        <p id="noCurrentMissions">No current missions</p>
         <hr>
-       <h1>Missions Available:</h1>
-        <p id="noMissions">No missions currently available</p>
+        <?php if(CurrMission($_SESSION["username"])) {
+
+            echo "<p id='noCurrentMissions' style='font-size: 30px;'><b>".MissionName(IsCurrMission($_SESSION["username"]))."<br>";?>
+        <div id="timer" style="color: darkgreen; font-size: 25px; margin-left: 15px; margin-bot: 15px;"><b></b></div>
+        <?php } else { ?>
+        <p id="noCurrentMissions">No current missions</p>
+        <?php echo LevelUp($_SESSION["username"]);
+         } ?>
     </div>
 </main>
 </body >

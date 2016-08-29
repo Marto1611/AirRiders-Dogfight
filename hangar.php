@@ -13,12 +13,12 @@ if(isset($_SESSION['username'])) {
     function PlayerAircraft($player)
     {
         $query1 = mysql_query("SELECT ItemID FROM purchases WHERE Username='$player' AND Type='aircraft'") or die(mysql_error());
+        $i=0;
         while($row1 = mysql_fetch_row($query1)) {
             $aircraftID = $row1[0];
             $query2 = mysql_query("SELECT * FROM `aircraft` WHERE AircraftID='$aircraftID'") or die(mysql_error());
             $query3 = mysql_query("SELECT Aircraft FROM `players` WHERE Username='$player'") or die(mysql_error());
             $selectedAircraft = mysql_fetch_row($query3);
-            $i=0;
             while ($row = mysql_fetch_assoc($query2)) {
                 $i++;
                 ?>

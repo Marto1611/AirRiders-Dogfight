@@ -43,9 +43,8 @@ table {
 }
 
 /* My css file below */
-@font-face {
-    font-family: "Gtek";
-    src: url('Gtek.ttf') format("truetype");
+html button:hover {
+cursor: pointer;
 }
 
 html {

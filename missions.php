@@ -19,8 +19,8 @@ if(isset($_SESSION['username'])) {
             $i++;
             ?>
             <div class="missionStyle">
-                <form method="post" action="mission_start.php" id="<?php echo $i; ?>">
-                    <input value="<?php echo $row['MissionID']; ?>" type="hidden" name="Aircraft"/>
+                <form method="post" action="startMission.php" id="<?php echo $i; ?>">
+                    <input value="<?php echo $row['MissionID']; ?>" type="hidden" name="missionID"/>
                     <h1><?php echo $row['Name']; ?></h1>
                     <hr>
                     <h1>Required Ammo</h1>
@@ -28,32 +28,48 @@ if(isset($_SESSION['username'])) {
                     <hr>
                     <h1>Mission Briefing</h1>
                     <hr>
+                    <div class="briefing">
                     <p style="font-size: 20px"><?php echo $row['Briefing']; ?></p>
+                    </div>
                     <hr>
-                    <?php if(CurrMission($_SESSION["username"])) {
-                        ?>
-                        <button disabled style="opacity: 1; color: black;">You are already on a Mission</button>
-                        <?php
-                    } else
-                    {
-                        if($row['AmmoType'] == "Guns only")
-                        {
-                            if(GunsAmmo($_SESSION["username"]) > $row["ReqAmmo"])
+                    <h1>Reward:  <span style="color: darkblue;"><?php echo $row["GainedCoins"]; ?></span><img src="css/images/icons/coin.svg" width="20px" height="15"/> +  <span style="color: darkblue;">XP Points</span></h1>
+                    <hr>
+                    <h1>Mission Duration: <span style="color: darkblue;"><?php echo (int)$row["Time"]; ?></span> Hrs <span style="color: darkblue;"><?php echo ($row["Time"]-(int)$row["Time"])*60; ?></span> Min</h1>
+                    <hr>
+                    <?php
+                            if(CurrMission($_SESSION["username"])) {
+                            if(IsCurrMission($_SESSION["username"]) == $row["MissionID"])
                             {
-                                ?>
-                                <button>You have Ammo</button>
+                        ?>
+                                <button disabled style="opacity: 1; color: black; background-color: darkgoldenrod;">Time Left: <div id="timer"></div></button>
                                 <?php
+                    } else { ?>
+                                <button disabled style="opacity: 1; color: black;">You are already on a Mission</button>
+
+                                <?php
+                    } } else
+                    {
+                        if(isMissionCompleted($_SESSION["username"],$row["MissionID"]) == 1)
+                        { ?>
+
+                            <button disabled style="opacity: 1; color: black; background-color: darkgoldenrod;">Completed</button>
+
+                     <?php   }
+                        else {
+                            if ($row['AmmoType'] == "Guns only") {
+                                if (GunsAmmo($_SESSION["username"]) >= $row["ReqAmmo"]) {
+                                    ?>
+                                    <button>Start Mission</button>
+                                    <?php
+                                } else { ?>
+                                    <button disabled style="opacity: 1; color: black;">Not enough Guns Ammo</button>
+
+                                <?php }
+
                             }
-                            else
-                            { ?>
-                                <button disabled style="opacity: 1; color: black;">Not enough Guns Ammo</button>
+                            if ($row['AmmoType'] == "Guns, Missiles") {
 
-                          <?php  }
-
-                        }
-                        if($row['AmmoType'] == "Guns, Missiles")
-                        {
-
+                            }
                         }
                     }
                     ?>
@@ -89,6 +105,15 @@ if(isset($_SESSION['username'])) {
         <link type = "text/css" rel = "stylesheet" href = "css/profile.css" />
         <meta charset = "UTF-8" >
         <title >Aircraft Hangar</title>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                setInterval(function(){
+                    $('#timer').load('timer.php');
+                },1000);
+
+            });
+        </script>
     </head >
     <body>
     <aside class="sidebar">
@@ -107,6 +132,12 @@ if(isset($_SESSION['username'])) {
     </aside>
     <main class="aircraftWrap">
         <?php echo Missions(); ?>
+        <div class="ammoBox">
+            <h1>Ammo Inventory</h1>
+            <hr>
+            <h1>Guns Ammo QTY: <u style="color: darkgoldenrod;"><?php echo GunsAmmo($_SESSION["username"]); ?></u></h1>
+            <h1>Missiles: <u style="color: darkgoldenrod;"><?php echo MissileAmmo($_SESSION["username"]); ?></u></h1>
+        </div>
     </main>
     </body >
     </html >
