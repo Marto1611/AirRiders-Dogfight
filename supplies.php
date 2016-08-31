@@ -97,6 +97,7 @@ if(isset($_SESSION['username'])) {
             <hr>
             <h1>Guns Ammo QTY: <u style="color: darkgoldenrod;"><?php echo GunsAmmo($_SESSION["username"]); ?></u></h1>
             <h1>Missiles: <u style="color: darkgoldenrod;"><?php echo MissileAmmo($_SESSION["username"]); ?></u></h1>
+			<a href="missions.php" style="color: darkgoldenrod; margin: 6px;">Available Missions</a>
         </div>
         <script type="text/javascript">
             function SubmitF1()

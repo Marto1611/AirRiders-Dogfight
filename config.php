@@ -1,8 +1,8 @@
 <?php session_start();
 $server="localhost";
-$username="root";
-$password="";
-$db_name="airriders";
+$username="dogfight_marto";
+$password="7FS~9]HPF_19";
+$db_name="dogfight_airriders";
 
 
 $connect = mysql_connect($server,$username,$password) or die (mysql_error());

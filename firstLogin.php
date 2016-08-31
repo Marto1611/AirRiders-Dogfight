@@ -84,10 +84,27 @@ if(mysql_num_rows($fLog_query) == 1) {
         <!DOCTYPE html >
         <html lang = "en" >
         <head >
+		    <script src="alertifyjs/jquery-3.1.0.min.js"></script>
+    <script src="alertifyjs/alertify.min.js"></script>
+    <!-- include the style -->
+    <link rel="stylesheet" href="alertifyjs/css/alertify.min.css" />
+    <!-- include a theme -->
+    <link rel="stylesheet" href="alertifyjs/themes/default.css" />
             <link rel="shortcut icon" href="css/images/icons/jetIcon.png" type="image/x-icon" />
             <link type = "text/css" rel = "stylesheet" href = "css/profile.css" />
             <meta charset = "UTF-8" >
             <title ><?php echo $user; ?>'s Profile</title >
+			<script>
+			$(function() {
+			 alertify.confirm('Hello Private !',"Welcome to the world of Dogfighting. AirRiders is the codename of your squad. We fight for freedom and justice and being here means you do the same from now on ! Would you like to go to the Teacher's Room and pass the tutorial ? -Commander",function() { 
+			 				 			 alertify.alert('Tutorial',"Hi, Private.Commander sends you huh? I will tell you some things so listen carefully. As an AirRider you must complete missions. Those missions give you coins.To start missions you need supplies like ammo, missiles etc. Be careful though every mission require different ammo! The aircraft tab allows you to buy aircraft from The Military Airforce. Aircrafts are expensive, consider this. The Hangar is your place in the Aviobase. There you can choose which plane you wish to fly. *telephone rings* Opps, looks like I gotta go! You'll figure out the rest. Bye ! - Teacher",function() { 
+										 
+										 alertify.success('Tutorial has been passed! \nAs a newcomer you are granted a free aircraft. You can choose between the MiG-29, F-16 Fighting Falcon and Saab JAS 39 Gripen. They are not the best, but you are not either. Make your choice Private !',30);
+										 }).set('label','Finish Tutorial');
+			 
+			 }, function() { alertify.error("Tutorial Declined!"); }).set('labels', { ok: 'Start Tutorial', cancel: 'Miss Tutorial' });
+			});																				 
+			 </script>
         </head >
         <body >
         <aside class="sidebar">

@@ -81,7 +81,6 @@ if(isset($_SESSION['username'])) {
     <link rel="stylesheet" href="alertifyjs/css/alertify.min.css" />
     <!-- include a theme -->
     <link rel="stylesheet" href="alertifyjs/themes/default.css" />
-    <link href="http://allfont.net/allfont.css?fonts=arial-black" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="css/images/icons/jetIcon.png" type="image/x-icon" />
     <link type = "text/css" rel = "stylesheet" href = "css/profile.css" />
     <meta charset = "UTF-8" >

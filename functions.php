@@ -121,9 +121,12 @@ function LevelUp($player)
     while($row = mysql_fetch_assoc($lvlQuery)) {
         if ($row["CurrXP"] >= 100) {
             $newLevel = Level($player) + 1;
-            $levelUpQuery = mysql_query("UPDATE `players` SET LVL='$newLevel', CurrXP='0' WHERE Username='$player'") or die(mysql_error());
+			$newCash = Cash($player) + 10;
+            $levelUpQuery = mysql_query("UPDATE `players` SET LVL='$newLevel', CurrXP='0', Cash='$newCash' WHERE Username='$player'") or die(mysql_error());
+			echo "<script>alertify.alert('Level Up !', 'Congratulations, ".$player."! You are now Level ".$newLevel."', function(){ alertify.success('You have been rewarded with 10 Coins!',7); });</script>";
             $_SESSION["lvl"] = $newLevel;
         }
     }
 }
+
 
